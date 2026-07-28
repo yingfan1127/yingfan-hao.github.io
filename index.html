@@ -1,459 +1,1114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yingfan Hao | Portfolio</title>
-    <style>
-        /* === 1. Global Variables & Base Setup === */
-        :root {
-            --bg-color: #000000;
-            --text-primary: #ffffff;
-            --text-secondary: #86868b; /* Apple style gray */
-            --glass-bg: rgba(28, 28, 30, 0.5);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --nav-height: 60px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Yingfan Hao — Product, Data, and AI portfolio." />
+  <title>Yingfan Hao | Product · Data · AI</title>
 
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: rgba(18, 18, 22, 0.72);
+      --surface-strong: rgba(18, 18, 22, 0.9);
+      --text: #f5f5f7;
+      --muted: #a8a8b3;
+      --line: rgba(255, 255, 255, 0.10);
+      --accent: #8ed7ff;
+      --accent-2: #b8a7ff;
+      --max-width: 1180px;
+      --nav-height: 72px;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-stack);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(82, 144, 255, 0.08), transparent 28%),
+        radial-gradient(circle at 85% 65%, rgba(148, 112, 255, 0.08), transparent 24%),
+        var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-        /* === 2. Navigation Bar === */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--nav-height);
-            padding: 0 5vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: transparent;
-            transition: background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
-            border-bottom: 1px solid transparent;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        nav.scrolled {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-        }
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        nav .logo {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
+    .site-nav.scrolled {
+      background: rgba(5, 5, 5, 0.68);
+      backdrop-filter: blur(20px);
+      border-bottom-color: var(--line);
+    }
 
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s ease;
-        }
+    .nav-inner {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--text-primary);
-        }
+    .brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+    }
 
-        /* Hamburger Menu (Mobile) */
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            position: relative;
-            z-index: 1001;
-        }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      color: #d5d5dc;
+      font-size: 0.95rem;
+    }
 
-        .menu-btn span {
-            display: block;
-            width: 100%;
-            height: 1.5px;
-            background-color: var(--text-primary);
-            position: absolute;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
+    .nav-links a {
+      position: relative;
+      transition: color 0.2s ease;
+    }
 
-        .menu-btn span:nth-child(1) { top: 6px; }
-        .menu-btn span:nth-child(2) { top: 12px; }
-        .menu-btn span:nth-child(3) { top: 18px; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s ease;
+    }
 
-        .menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-        .menu-btn.open span:nth-child(2) { opacity: 0; }
-        .menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #fff;
+    }
 
-        /* === 3. Hero Section === */
-        #hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5vw;
-            overflow: hidden;
-        }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
 
-        /* Background Image with slight scale animation */
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('/images/yingfan-hero.jpg');
-            background-size: cover;
-            /* Adjust this to keep your face in frame. Examples: center 20%, 70% center, etc. */
-            background-position: 70% center; 
-            z-index: 1;
-            opacity: 0;
-            animation: bgFadeIn 1.5s ease forwards;
-        }
+    .menu-button {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: white;
+      font: inherit;
+      cursor: pointer;
+    }
 
-        /* Directional Gradient Overlay */
-        #hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            /* Dark gradient on the left for text readability, fading out to the right */
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%),
-                        linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 30%);
-            pointer-events: none;
-        }
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      isolation: isolate;
+    }
 
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            max-width: 800px;
-            margin-top: 40px; /* Offset for nav */
-        }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background-image: url("./public/images/yingfan-hero.JPG");
+      background-size: cover;
+      background-position: center 43%;
+      transform: scale(1.02);
+      animation: heroZoom 16s ease-out forwards;
+    }
 
-        .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 35%, rgba(0,0,0,0.24) 67%, rgba(0,0,0,0.12) 100%),
+        linear-gradient(0deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.10) 48%, rgba(0,0,0,0.28) 100%);
+    }
 
-        .hero h2 {
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.3;
-            margin-bottom: 1.5rem;
-            max-width: 650px;
-        }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 180px;
+      z-index: -1;
+      background: linear-gradient(transparent, var(--bg));
+    }
 
-        .hero .tags {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            margin-bottom: 3rem;
-        }
+    .hero-content {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 80px) 0 110px;
+      max-width: var(--max-width);
+    }
 
-        /* Buttons */
-        .hero-actions {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
+    .hero-copy {
+      max-width: 760px;
+    }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: #d8d8de;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-        .btn-primary {
-            background-color: var(--text-primary);
-            color: var(--bg-color);
-        }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
 
-        .btn-primary:hover {
-            transform: scale(1.02);
-            background-color: rgba(255, 255, 255, 0.9);
-        }
+    h1 {
+      margin: 0;
+      font-size: clamp(3.4rem, 7vw, 7.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+    }
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-primary);
-        }
+    .hero-lede {
+      margin: 28px 0 0;
+      max-width: 760px;
+      font-size: clamp(1.45rem, 2.8vw, 2.65rem);
+      line-height: 1.28;
+      letter-spacing: -0.035em;
+      font-weight: 600;
+      color: #f1f1f4;
+    }
 
-        .btn-secondary .arrow {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
+    .hero-tags {
+      margin: 22px 0 0;
+      color: #c7c7ce;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
 
-        .btn-secondary:hover .arrow {
-            transform: translateX(4px);
-        }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px 28px;
+      margin-top: 34px;
+    }
 
-        /* Animations */
-        @keyframes bgFadeIn {
-            0% { opacity: 0; transform: scale(1.03); }
-            100% { opacity: 1; transform: scale(1); }
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 26px;
+      border-radius: 999px;
+      font-weight: 650;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
 
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+    .btn-primary {
+      background: white;
+      color: #080808;
+    }
 
-        .animate-up {
-            opacity: 0;
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-2px);
+      background: #ececf0;
+    }
 
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+    }
 
-        /* === 4. Existing Sections (Re-styled for consistency) === */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 5vw 40px;
-        }
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.10);
+    }
 
-        section.content-section {
-            margin-bottom: 100px;
-        }
+    .section {
+      position: relative;
+      padding: 120px 24px;
+    }
 
-        h3.section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 40px;
-            color: var(--text-primary);
-        }
+    .section-inner {
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+    }
 
-        .glass-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 20px;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .menu-btn {
-                display: block;
-            }
+    .section-heading {
+      margin-bottom: 42px;
+    }
 
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2rem;
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.4s ease;
-            }
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+    }
 
-            .nav-links.active {
-                opacity: 1;
-                visibility: visible;
-            }
+    h2 {
+      margin: 0;
+      font-size: clamp(2.6rem, 5vw, 5.3rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+    }
 
-            .nav-links a {
-                font-size: 1.5rem;
-            }
+    .section-intro {
+      margin: 24px 0 0;
+      max-width: 760px;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      color: var(--muted);
+      line-height: 1.65;
+    }
 
-            .hero-bg {
-                /* Adjust mobile image position so face is centered */
-                background-position: 50% 20%; 
-            }
+    .liquid-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+        rgba(13, 13, 18, 0.82);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 28px 80px rgba(0,0,0,0.34);
+      backdrop-filter: blur(28px);
+    }
 
-            #hero::after {
-                /* On mobile, darken the bottom area more so text remains readable when stacked */
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.1) 100%);
-            }
+    .liquid-card::before,
+    .liquid-card::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.22;
+      pointer-events: none;
+    }
 
-            .hero-actions {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-        }
-    </style>
+    .liquid-card::before {
+      top: -210px;
+      left: -140px;
+      background: #5aa8ff;
+      animation: floatBlobA 13s ease-in-out infinite alternate;
+    }
+
+    .liquid-card::after {
+      right: -180px;
+      bottom: -220px;
+      background: #9c79ff;
+      animation: floatBlobB 16s ease-in-out infinite alternate;
+    }
+
+    .about-card {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      padding: 58px;
+    }
+
+    .about-copy,
+    .about-pillars {
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-copy p {
+      margin: 0 0 20px;
+      color: #d2d2d8;
+      font-size: 1.06rem;
+      line-height: 1.78;
+    }
+
+    .quote-line {
+      color: white !important;
+      font-size: clamp(1.45rem, 2.4vw, 2.2rem) !important;
+      line-height: 1.35 !important;
+      letter-spacing: -0.035em;
+      font-weight: 600;
+      margin-bottom: 30px !important;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .chip {
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: #dedee4;
+      font-size: 0.92rem;
+    }
+
+    .pillar {
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .pillar:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .pillar h3 {
+      margin: 0 0 8px;
+      font-size: 1.14rem;
+      letter-spacing: -0.02em;
+    }
+
+    .pillar p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 34px;
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .timeline-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .timeline-role {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: -0.025em;
+    }
+
+    .timeline-company {
+      margin: 4px 0 12px;
+      color: #c9c9d1;
+    }
+
+    .timeline-body {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      min-height: 320px;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .project-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.6rem;
+      letter-spacing: -0.035em;
+    }
+
+    .project-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-label {
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .project-link {
+      margin-top: 34px;
+      color: #f6f6f8;
+      font-weight: 650;
+    }
+
+    .education-grid,
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .info-card {
+      padding: 32px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+
+    .coursework {
+      margin-top: 18px !important;
+      color: #d9d9df !important;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .coursework-label {
+      display: block;
+      margin-bottom: 6px;
+      color: #ffffff;
+      font-weight: 650;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+
+    .skills-grid .info-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.32s cubic-bezier(.2,.7,.2,1), box-shadow 0.32s ease, border-color 0.32s ease;
+      will-change: transform;
+    }
+
+    .skills-grid .info-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.14), transparent 34%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .skills-grid .info-card:hover {
+      transform: translateY(-10px) scale(1.018);
+      border-color: rgba(255,255,255,0.24);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 34px 90px rgba(0,0,0,0.48);
+    }
+
+    .skills-grid .info-card:hover::after {
+      opacity: 1;
+    }
+
+    .skills-grid .chip {
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .skills-grid .chip:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .life-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .life-card {
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(14,14,18,0.82);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.32);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .life-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 34px 90px rgba(0,0,0,0.45);
+    }
+
+    .life-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .life-card:nth-child(2) .life-image {
+      object-position: center 54%;
+    }
+
+    .life-card:nth-child(3) .life-image {
+      object-position: center 42%;
+    }
+
+    .life-content {
+      padding: 26px;
+    }
+
+    .life-content h3 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .life-content p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-panel {
+      padding: 54px;
+      text-align: center;
+    }
+
+    .contact-panel p {
+      max-width: 700px;
+      margin: 22px auto 32px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    footer {
+      padding: 36px 24px 50px;
+      color: #8c8c95;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px) scale(0.985);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.07); }
+      to { transform: scale(1.02); }
+    }
+
+    @keyframes floatBlobA {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(90px, 55px, 0) scale(1.12); }
+    }
+
+    @keyframes floatBlobB {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(-80px, -45px, 0) scale(1.08); }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        position: fixed;
+        top: var(--nav-height);
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: rgba(10, 10, 12, 0.94);
+        backdrop-filter: blur(24px);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 14px;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .hero-bg {
+        background-position: 58% 42%;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(0deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 52%, rgba(0,0,0,0.18) 100%);
+      }
+
+      .hero-content {
+        padding-bottom: 78px;
+      }
+
+      .hero-copy {
+        max-width: 100%;
+      }
+
+      .about-card {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 34px 26px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .project-grid,
+      .education-grid,
+      .skills-grid,
+      .life-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-inner {
+        width: min(calc(100% - 30px), var(--max-width));
+      }
+
+      .hero-content {
+        width: min(calc(100% - 32px), var(--max-width));
+      }
+
+      .hero-lede {
+        line-height: 1.34;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 88px 16px;
+      }
+
+      .project-card,
+      .info-card,
+      .contact-panel {
+        padding: 26px;
+      }
+
+      .liquid-card {
+        border-radius: 26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <nav class="site-nav" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="brand">Yingfan.</a>
+      <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#life">Life</a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Navigation -->
-    <nav id="navbar">
-        <a href="#hero" class="logo">Yingfan.</a>
-        <div class="nav-links" id="navLinks">
-            <a href="#about" class="nav-item">About</a>
-            <a href="#experience" class="nav-item">Experience</a>
-            <a href="#projects" class="nav-item">Projects</a>
-            <a href="#education" class="nav-item">Education</a>
-            <a href="#skills" class="nav-item">Skills</a>
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="hero-copy">
+          <div class="eyebrow">New York City · Product · Data · AI</div>
+          <h1>Hi, I’m Yingfan Hao.</h1>
+          <p class="hero-lede">I turn data, AI, and real-world user needs into products people want to use.</p>
+          <p class="hero-tags">Product · Data · AI</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="./public/resume/Yingfan-Hao-Resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
+            <a class="btn btn-secondary" href="#projects">Explore My Work →</a>
+          </div>
         </div>
-        <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <h1 class="animate-up delay-1">Hi, I’m Yingfan Hao.</h1>
-            <h2 class="animate-up delay-2">I turn data, AI, and real-world user needs into products people want to use.</h2>
-            <p class="tags animate-up delay-3">Product &middot; Data &middot; AI</p>
-            <div class="hero-actions animate-up delay-4">
-                <a href="/resume/Resume-Yingfan Hao (1).pdf" target="_blank" class="btn btn-primary">View Resume</a>
-                <a href="#projects" class="btn btn-secondary">Explore My Work <span class="arrow">&rarr;</span></a>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- Container for rest of the page (Retained & styled cleanly) -->
-    <div class="container">
-        
-        <section id="about" class="content-section">
-            <h3 class="section-title">About Me</h3>
-            <div class="glass-card">
-                <p style="color: var(--text-secondary); margin-bottom: 15px;">[Existing About Me Content preserved and adapted to clean dark mode.]</p>
+    <section class="section" id="about">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <p class="kicker">About Me</p>
+          <h2>Where data becomes a decision—and a decision becomes a product.</h2>
+        </div>
+
+        <div class="liquid-card about-card reveal">
+          <div class="about-copy">
+            <p class="quote-line">I’m interested in the space where data becomes insight, insight becomes a decision, and a decision becomes a product.</p>
+            <p>I’m Yingfan Hao, a Columbia University graduate with experience across data analytics, data engineering, AI model evaluation, and customer-facing operations.</p>
+            <p>I enjoy going beyond the numbers to understand why a problem exists, what users actually need, and how technology can turn those insights into a practical solution.</p>
+            <p>My long-term goal is to grow into a product role where I can connect user needs, business priorities, and technical execution—turning ambiguity into something useful, measurable, and intuitive.</p>
+
+            <div class="chips">
+              <span class="chip">Product Thinking</span>
+              <span class="chip">Data Analytics</span>
+              <span class="chip">AI Evaluation</span>
+              <span class="chip">Automation</span>
+              <span class="chip">User Experience</span>
             </div>
-        </section>
+          </div>
 
-        <section id="experience" class="content-section">
-            <h3 class="section-title">Experience</h3>
-            <div class="glass-card">
-                <p style="color: var(--text-secondary);">[Existing Experience Content...]</p>
+          <div class="about-pillars">
+            <article class="pillar">
+              <h3>Product Thinking</h3>
+              <p>I start with the user problem, define what success looks like, and connect ideas to practical execution.</p>
+            </article>
+            <article class="pillar">
+              <h3>Data & Analytics</h3>
+              <p>I use data to uncover patterns, evaluate decisions, and communicate insights to technical and nontechnical stakeholders.</p>
+            </article>
+            <article class="pillar">
+              <h3>AI & Automation</h3>
+              <p>I explore how AI and automation can simplify workflows, improve decision-making, and create better experiences.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <p class="kicker">Experience</p>
+          <h2>Work grounded in real problems.</h2>
+          <p class="section-intro">My experience spans AI evaluation, growth analytics, demand forecasting, and data engineering.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-meta">2026.04 – Present<br>Remote</div>
+            <div>
+              <h3 class="timeline-role">AI Model Evaluation Contractor</h3>
+              <p class="timeline-company">Handshake AI Project Brass II</p>
+              <p class="timeline-body">Designed realistic computer-use tasks for native Apple iOS workflows, evaluated model execution and instruction adherence, and refined prompts to improve reliability.</p>
             </div>
-        </section>
+          </article>
 
-        <!-- Added Projects Section Placeholder to ensure links work -->
-        <section id="projects" class="content-section">
-            <h3 class="section-title">Projects</h3>
-            <div class="glass-card">
-                <p style="color: var(--text-secondary);">[Projects content will be redesigned in upcoming steps...]</p>
+          <article class="timeline-item reveal">
+            <div class="timeline-meta">2026.02 – 2026.05<br>New York, NY</div>
+            <div>
+              <h3 class="timeline-role">Growth and Operations Analyst</h3>
+              <p class="timeline-company">Chubby Group</p>
+              <p class="timeline-body">Combined sales, customer feedback, and operational data across 10+ restaurant locations to support performance decisions, root-cause analysis, and campaign strategy.</p>
             </div>
-        </section>
+          </article>
 
-        <section id="education" class="content-section">
-            <h3 class="section-title">Education</h3>
-            <div class="glass-card">
-                <p style="color: var(--text-secondary);">[Existing Education Content...]</p>
+          <article class="timeline-item reveal">
+            <div class="timeline-meta">2025.09 – 2025.12<br>New York, NY</div>
+            <div>
+              <h3 class="timeline-role">Data Analytics Consultant</h3>
+              <p class="timeline-company">David J. Joseph Company · Columbia Capstone</p>
+              <p class="timeline-body">Built ARIMA and XGBoost demand forecasting models over a 20-week planning horizon and worked directly with stakeholders through weekly client meetings.</p>
             </div>
-        </section>
+          </article>
 
-        <section id="skills" class="content-section">
-            <h3 class="section-title">Skills</h3>
-            <div class="glass-card">
-                <p style="color: var(--text-secondary);">[Existing Skills Content...]</p>
+          <article class="timeline-item reveal">
+            <div class="timeline-meta">2024.05 – 2024.08<br>Macau SAR, China</div>
+            <div>
+              <h3 class="timeline-role">Data Engineering Intern</h3>
+              <p class="timeline-company">Yonyou Network Co., Ltd.</p>
+              <p class="timeline-body">Built SQL and Python ETL pipelines processing 10M+ records, improved reporting preparation time by 40%, and implemented data quality checks.</p>
             </div>
-        </section>
-    </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <!-- Scripts for Interactivity -->
-    <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+    <section class="section" id="projects">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <p class="kicker">Projects</p>
+          <h2>Systems that turn information into action.</h2>
+        </div>
 
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
-        const navItems = document.querySelectorAll('.nav-item');
+        <div class="project-grid">
+          <article class="liquid-card project-card reveal">
+            <div>
+              <span class="project-label">Forecasting · Python · XGBoost</span>
+              <h3>Demand Forecasting for Inventory Planning</h3>
+              <p>Developed a forecasting workflow using historical inventory and order data to predict weekly demand and support operational planning decisions.</p>
+            </div>
+            <span class="project-link">Business problem → analytical system</span>
+          </article>
 
-        const toggleMenu = () => {
-            menuBtn.classList.toggle('open');
-            navLinks.classList.toggle('active');
-            
-            // Prevent body scrolling when menu is open
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
-        };
+          <article class="liquid-card project-card reveal">
+            <div>
+              <span class="project-label">SQL · APIs · R Shiny</span>
+              <h3>Theme Park Information Web App</h3>
+              <p>Designed a relational database, integrated external APIs, and connected backend queries to a dynamic R Shiny interface.</p>
+            </div>
+            <a class="project-link" href="https://keirahao1112.shinyapps.io/Team1/" target="_blank" rel="noopener noreferrer">View live demo →</a>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        menuBtn.addEventListener('click', toggleMenu);
+    <section class="section" id="education">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <p class="kicker">Education</p>
+          <h2>Built across analytics, technology, and business.</h2>
+        </div>
 
-        // Close mobile menu when a link is clicked
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    toggleMenu();
-                }
-            });
-        });
-    </script>
+        <div class="education-grid">
+          <article class="liquid-card info-card reveal">
+            <h3>Columbia University</h3>
+            <p>M.S. Computer and Information Science · GPA 3.77</p>
+            <p class="coursework"><span class="coursework-label">Relevant Coursework</span>SQL ｜ Mathematics for AI ｜ Research Design ｜ Anomaly Detection</p>
+          </article>
+
+          <article class="liquid-card info-card reveal">
+            <h3>Macau University of Science and Technology</h3>
+            <p>B.A. Business Analytics · GPA 3.70</p>
+            <p class="coursework"><span class="coursework-label">Relevant Coursework</span>Data Mining ｜ Data Structures ｜ Machine Learning ｜ Big Data</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <p class="kicker">Skills</p>
+          <h2>Tools for finding clarity in complex systems.</h2>
+        </div>
+
+        <div class="skills-grid">
+          <article class="liquid-card info-card reveal">
+            <h3>Technical</h3>
+            <div class="skills-list">
+              <span class="chip">Python</span>
+              <span class="chip">SQL</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">BigQuery</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Tableau</span>
+              <span class="chip">Looker Studio</span>
+              <span class="chip">Power BI</span>
+              <span class="chip">Excel</span>
+            </div>
+          </article>
+
+          <article class="liquid-card info-card reveal">
+            <h3>Analytics</h3>
+            <div class="skills-list">
+              <span class="chip">ETL & Data Pipelines</span>
+              <span class="chip">Data Quality</span>
+              <span class="chip">A/B Testing</span>
+              <span class="chip">Metrics Design</span>
+              <span class="chip">Data Visualization</span>
+              <span class="chip">Forecasting</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section" id="life">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <p class="kicker">Beyond Work</p>
+          <h2>A little more human.</h2>
+          <p class="section-intro">The things that keep me grounded, curious, and connected outside of work.</p>
+        </div>
+
+        <div class="life-grid">
+          <article class="life-card reveal">
+            <img class="life-image" src="./public/images/life/dog.JPG" alt="Yingfan's dog at home">
+            <div class="life-content">
+              <h3>Dog Person</h3>
+              <p>Spending time with my dog—and taking long walks when life gets busy—is one of my favorite ways to reset and recharge.</p>
+            </div>
+          </article>
+
+          <article class="life-card reveal">
+            <img class="life-image" src="./public/images/life/basketball.jpg" alt="A basketball game viewed courtside">
+            <div class="life-content">
+              <h3>Basketball</h3>
+              <p>At 5'11", I played basketball for a period of time, and following the NBA is still one of my favorite ways to stay connected to the sport.</p>
+            </div>
+          </article>
+
+          <article class="life-card reveal">
+            <img class="life-image" src="./public/images/life/volunteer.JPG" alt="Yingfan volunteering with students in Bali">
+            <div class="life-content">
+              <h3>Volunteer Teaching</h3>
+              <p>I volunteered as a teacher in Bali, helping local students with mathematics and English—an experience that made learning feel deeply personal.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-inner">
+        <div class="liquid-card contact-panel reveal">
+          <p class="kicker">Contact</p>
+          <h2>Let’s build something useful.</h2>
+          <p>I’m interested in product, data, AI, analytics, and cross-functional roles where user needs and technical execution meet.</p>
+          <div class="contact-links">
+            <a class="btn btn-primary" href="mailto:keirahao1127@gmail.com">Email Me</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com/in/yingfan-hao-651666325/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Yingfan Hao. Built with HTML, CSS, and JavaScript.
+  </footer>
+
+  <script>
+    const navbar = document.getElementById("navbar");
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 20);
+    });
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+
+    document.querySelectorAll(".skills-grid .info-card").forEach(card => {
+      card.addEventListener("pointermove", event => {
+        const rect = card.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty("--mx", `${x}%`);
+        card.style.setProperty("--my", `${y}%`);
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
